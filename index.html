@@ -39,11 +39,7 @@
     header { background: var(--charcoal); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; max-width: 1200px; margin: 0 auto; height: 72px; }
     .logo-wrap { display: flex; align-items: center; gap: 1rem; }
-    .logo-icon { width: 44px; height: 44px; background: var(--red); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .logo-icon svg { width: 26px; height: 26px; fill: #fff; }
-    .logo-text { display: flex; flex-direction: column; }
-    .logo-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.35rem; color: #fff; letter-spacing: 0.04em; line-height: 1; text-transform: uppercase; }
-    .logo-tagline { font-size: 0.65rem; color: var(--silver); font-family: 'Barlow', sans-serif; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+    .logo-img { height: 44px; width: auto; }
     nav ul { display: flex; list-style: none; gap: 0; align-items: center; }
     nav ul a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.92rem; color: var(--chrome); padding: 0.5rem 1rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; border-bottom: 2px solid transparent; }
     nav ul a:hover { color: #fff; border-bottom-color: var(--red); }
@@ -84,6 +80,8 @@
     .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
     .btn-dark { background: var(--charcoal); color: #fff; }
     .btn-dark:hover { background: var(--steel); color: #fff; transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--charcoal); }
+    .btn-gold:hover { background: #e6b020; color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,160,23,0.4); }
 
     /* SERVICES STRIP */
     .services-strip { background: var(--off); border-bottom: 1px solid var(--chrome); padding: 4rem 1.5rem; }
@@ -101,33 +99,38 @@
     .service-card p { font-size: 0.88rem; color: var(--silver); line-height: 1.65; }
     .service-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); margin-top: 1rem; }
 
-    /* AUCTION SECTION */
-    .auction-section { padding: 5rem 1.5rem; background: var(--charcoal); }
-    .auction-inner { max-width: 1200px; margin: 0 auto; }
-    .auction-section .section-label { color: var(--gold); }
-    .auction-section h2 { color: #fff; font-size: clamp(2rem, 4.5vw, 3rem); text-transform: uppercase; margin-bottom: 0.75rem; }
-    .auction-section > .auction-inner > p { color: rgba(255,255,255,0.65); max-width: 560px; margin-bottom: 3rem; }
-    .auction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2.5rem; }
-    .auction-card { background: var(--steel); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.07); transition: transform 0.3s; }
-    .auction-card:hover { transform: translateY(-4px); }
-    .auction-card-img { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .auction-card-img.sedan { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
-    .auction-card-img.suv { background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); }
-    .auction-card-img.truck { background: linear-gradient(135deg, #1b2838 0%, #2d3748 100%); }
-    .car-svg { width: 160px; opacity: 0.85; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5)); }
-    .auction-badge { position: absolute; top: 0.75rem; left: 0.75rem; background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 3px; }
-    .auction-badge.live { background: var(--gold); color: var(--charcoal); }
-    .auction-body { padding: 1.25rem; }
-    .auction-body h4 { font-size: 1rem; color: #fff; text-transform: uppercase; margin-bottom: 0.3rem; }
-    .auction-meta { font-size: 0.8rem; color: var(--silver); margin-bottom: 0.75rem; }
-    .auction-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--gold); }
-    .auction-price span { font-size: 0.75rem; color: var(--silver); font-weight: 400; font-family: 'Barlow', sans-serif; display: block; margin-top: 2px; }
-    .auction-actions { display: flex; gap: 0.75rem; margin-top: 1rem; }
-    .bid-btn { flex: 1; background: var(--red); color: #fff; border: none; border-radius: 4px; padding: 0.55rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-    .bid-btn:hover { background: var(--red-lt); }
-    .details-btn { padding: 0.55rem 1rem; background: transparent; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; color: rgba(255,255,255,0.7); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
-    .details-btn:hover { border-color: #fff; color: #fff; }
-    .auction-cta { text-align: center; margin-top: 1rem; }
+    /* =============================================
+       AUCTION SECTION — updated promo-style
+       ============================================= */
+    .auction-section { padding: 5rem 1.5rem; background: var(--charcoal); position: relative; overflow: hidden; }
+    .auction-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 70px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 70px);
+      pointer-events: none;
+    }
+    .auction-glow { position: absolute; top: 50%; right: -100px; transform: translateY(-50%); width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(212,160,23,0.12) 0%, transparent 65%); pointer-events: none; }
+    .auction-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .auction-left .section-label { color: var(--gold); }
+    .auction-left h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); color: #fff; text-transform: uppercase; margin-bottom: 1rem; line-height: 1.1; }
+    .auction-left h2 span { color: var(--gold); }
+    .auction-left p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; max-width: 460px; }
+    .auction-features { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2.5rem; }
+    .auction-features li { display: flex; align-items: center; gap: 0.85rem; color: rgba(255,255,255,0.8); font-size: 0.92rem; }
+    .auction-features li::before { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+    .auction-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .auction-right { display: flex; flex-direction: column; gap: 1.25rem; }
+    .auction-promo-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.75rem; border-left: 4px solid var(--gold); transition: background 0.25s, transform 0.25s; }
+    .auction-promo-card:hover { background: rgba(255,255,255,0.08); transform: translateX(4px); }
+    .promo-card-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .promo-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.15rem; color: #fff; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .promo-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+    .auction-promo-card:nth-child(2) { border-left-color: var(--red); }
+    .auction-promo-card:nth-child(2) .promo-card-label { color: var(--red-lt); }
+    .auction-promo-card:nth-child(3) { border-left-color: var(--silver); }
+    .auction-promo-card:nth-child(3) .promo-card-label { color: var(--chrome); }
 
     /* WHY SECTION */
     .why-section { padding: 5rem 1.5rem; background: var(--white); }
@@ -141,14 +144,13 @@
     .why-checklist li { display: flex; align-items: center; gap: 0.75rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; }
     .check-icon { width: 20px; height: 20px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .check-icon svg { width: 11px; height: 11px; fill: #fff; }
-    .why-right { }
     .why-right .section-label { color: var(--red); }
     .why-right h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); text-transform: uppercase; margin-bottom: 0.75rem; }
     .why-right > p { color: var(--silver); margin-bottom: 2.5rem; }
     .why-list { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
     .why-item { display: flex; gap: 1.25rem; align-items: flex-start; }
     .why-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: var(--chrome); line-height: 1; flex-shrink: 0; width: 40px; }
-    .why-item h4 { font-size: 1rem; margin-bottom: 0.2rem; text-transform: uppercase; font-size: 0.95rem; }
+    .why-item h4 { font-size: 0.95rem; margin-bottom: 0.2rem; text-transform: uppercase; }
     .why-item p { font-size: 0.87rem; color: var(--silver); line-height: 1.65; }
 
     /* BANNER */
@@ -209,7 +211,7 @@
       .hero-accent { display: none; }
       .hero-right { flex-direction: row; }
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .auction-grid { grid-template-columns: 1fr 1fr; }
+      .auction-inner { grid-template-columns: 1fr; gap: 3rem; }
       .why-inner { grid-template-columns: 1fr; gap: 3rem; }
       .hours-inner { grid-template-columns: 1fr; gap: 2rem; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -222,8 +224,8 @@
       nav.open ul a { display: block; padding: 0.7rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
       .header-inner { position: relative; }
       .services-grid { grid-template-columns: 1fr; }
-      .auction-grid { grid-template-columns: 1fr; }
       .hero-right { flex-direction: column; }
+      .auction-btns { flex-direction: column; }
     }
   </style>
 </head>
@@ -233,26 +235,26 @@
     Appointments &amp; Towing: <a href="tel:8005550199">(800) 555-0199</a> &nbsp;|&nbsp; <a href="mailto:service@firstupconsultants.com">service@firstupconsultants.com</a> &nbsp;|&nbsp; Houston, Texas
   </div>
 
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo-wrap">
-      <img src="assets/1UC.png" alt="First Up Consultants" class="logo-img">
-    </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav id="mainNav">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="#services">Repair Services</a></li>
-        <li><a href="#auctions">Car Auctions</a></li>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="tel:8005550199" class="nav-cta">Call Now</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo-wrap">
+        <img src="assets/1UC.png" alt="First Up Consultants" class="logo-img">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#services">Repair Services</a></li>
+          <li><a href="auctions.html">Car Auctions</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="tel:8005550199" class="nav-cta">Call Now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
   <section class="hero">
     <div class="hero-bg-pattern"></div>
@@ -264,7 +266,7 @@
         <p class="hero-sub">Expert auto repairs, diagnostics, and maintenance — plus Houston's most transparent car auction marketplace. First Up Consultants puts you in control of your automotive experience.</p>
         <div class="hero-btns">
           <a href="#services" class="btn btn-primary">View Repair Services</a>
-          <a href="#auctions" class="btn btn-outline">Browse Auctions</a>
+          <a href="auctions.html" class="btn btn-outline">Browse Auctions</a>
         </div>
       </div>
       <div class="hero-right">
@@ -351,91 +353,42 @@
     </div>
   </section>
 
-  <!-- AUCTIONS -->
+  <!-- AUCTIONS — updated promo section -->
   <section class="auction-section" id="auctions">
+    <div class="auction-glow"></div>
     <div class="auction-inner">
-      <div class="reveal">
+      <div class="auction-left reveal">
         <span class="section-label">Live &amp; Upcoming</span>
-        <h2>Car Auctions</h2>
-        <p>Bid on quality pre-owned vehicles at honest prices. All vehicles inspected, titled, and ready for the road. Register free and bid with confidence.</p>
-      </div>
-      <div class="auction-grid">
-        <div class="auction-card reveal">
-          <div class="auction-card-img sedan">
-            <div class="auction-badge live">Live Now</div>
-            <svg class="car-svg" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="50" cy="65" rx="18" ry="14" fill="#222" stroke="#555" stroke-width="2"/>
-              <ellipse cx="50" cy="65" rx="10" ry="7" fill="#333"/>
-              <ellipse cx="150" cy="65" rx="18" ry="14" fill="#222" stroke="#555" stroke-width="2"/>
-              <ellipse cx="150" cy="65" rx="10" ry="7" fill="#333"/>
-              <path d="M20 55 Q30 25 80 20 Q120 15 160 22 Q175 28 185 45 Q190 52 185 55 Z" fill="#c0392b"/>
-              <path d="M55 25 Q70 12 115 12 Q140 12 155 22 L150 25 Q130 18 105 17 Q72 18 58 28 Z" fill="#e74c3c"/>
-              <rect x="15" y="50" width="175" height="10" rx="4" fill="#922b21"/>
-              <path d="M60 24 Q75 14 110 14 Q135 14 148 22" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="6"/>
-            </svg>
-          </div>
-          <div class="auction-body">
-            <h4>2019 Honda Accord Sport</h4>
-            <div class="auction-meta">58,400 mi · Automatic · Clean Title</div>
-            <div class="auction-price">$14,800 <span>Current Bid</span></div>
-            <div class="auction-actions">
-              <button class="bid-btn">Place Bid</button>
-              <button class="details-btn">Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-card reveal" style="transition-delay:0.1s">
-          <div class="auction-card-img suv">
-            <div class="auction-badge">Closes Tomorrow</div>
-            <svg class="car-svg" viewBox="0 0 200 85" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="48" cy="68" rx="19" ry="15" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-              <ellipse cx="48" cy="68" rx="10" ry="8" fill="#2a2a2a"/>
-              <ellipse cx="152" cy="68" rx="19" ry="15" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-              <ellipse cx="152" cy="68" rx="10" ry="8" fill="#2a2a2a"/>
-              <path d="M15 58 Q18 30 55 22 Q95 14 140 18 Q168 22 185 40 Q190 52 185 58 Z" fill="#1a5276"/>
-              <path d="M50 22 Q90 10 140 15 Q162 18 178 32 L173 35 Q155 24 135 22 Q90 17 55 26 Z" fill="#2980b9" opacity="0.5"/>
-              <rect x="12" y="53" width="178" height="10" rx="3" fill="#154360"/>
-              <path d="M55 24 Q95 12 138 16 Q158 19 172 30" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="7"/>
-            </svg>
-          </div>
-          <div class="auction-body">
-            <h4>2021 Ford Explorer XLT</h4>
-            <div class="auction-meta">41,200 mi · AWD · Clean Title</div>
-            <div class="auction-price">$27,500 <span>Current Bid</span></div>
-            <div class="auction-actions">
-              <button class="bid-btn">Place Bid</button>
-              <button class="details-btn">Details</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-card reveal" style="transition-delay:0.2s">
-          <div class="auction-card-img truck">
-            <div class="auction-badge">Opens Friday</div>
-            <svg class="car-svg" viewBox="0 0 210 85" xmlns="http://www.w3.org/2000/svg">
-              <ellipse cx="50" cy="68" rx="20" ry="15" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-              <ellipse cx="50" cy="68" rx="11" ry="8" fill="#2a2a2a"/>
-              <ellipse cx="162" cy="68" rx="20" ry="15" fill="#1a1a1a" stroke="#555" stroke-width="2"/>
-              <ellipse cx="162" cy="68" rx="11" ry="8" fill="#2a2a2a"/>
-              <path d="M12 58 L12 32 Q12 24 20 22 L90 20 L90 28 L130 28 L130 22 L175 22 Q188 24 192 36 L196 58 Z" fill="#2d3748"/>
-              <rect x="90" y="28" width="40" height="30" fill="#1a202c"/>
-              <rect x="10" y="53" width="188" height="10" rx="3" fill="#1a202c"/>
-              <path d="M14 30 L88 24 L88 28" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6"/>
-            </svg>
-          </div>
-          <div class="auction-body">
-            <h4>2020 Chevy Silverado 1500</h4>
-            <div class="auction-meta">72,100 mi · 4x4 · Clean Title</div>
-            <div class="auction-price">$29,900 <span>Starting Bid</span></div>
-            <div class="auction-actions">
-              <button class="bid-btn">Register to Bid</button>
-              <button class="details-btn">Details</button>
-            </div>
-          </div>
+        <h2>Houston's Most Trusted<br/><span>Car Auctions</span></h2>
+        <p>Bid on quality pre-owned vehicles at honest, competitive prices. Every vehicle in our auction is fully inspected, titled, and ready for the road — no guesswork, no hidden history.</p>
+        <ul class="auction-features">
+          <li>150-point inspection on every vehicle</li>
+          <li>Clean, lien-free titles — transferred same day</li>
+          <li>Live and advance bidding available</li>
+          <li>On-site financing for qualified buyers</li>
+          <li>Free to register — bid with confidence</li>
+        </ul>
+        <div class="auction-btns">
+          <a href="auctions.html" class="btn btn-gold">View Auctions &amp; Register</a>
+          <a href="auctions.html#how-it-works" class="btn btn-outline">How It Works</a>
         </div>
       </div>
-      <div class="auction-cta reveal">
-        <a href="#contact" class="btn btn-primary" style="margin-right:1rem;">View All Auctions</a>
-        <a href="#contact" class="btn btn-outline">Register as a Bidder</a>
+      <div class="auction-right reveal" style="transition-delay:0.15s">
+        <div class="auction-promo-card">
+          <div class="promo-card-label">🟡 Live Now</div>
+          <div class="promo-card-title">Active Auction Events</div>
+          <div class="promo-card-desc">Current listings are live and accepting bids. Register on our auction page to view vehicles, inspection reports, and place bids today.</div>
+        </div>
+        <div class="auction-promo-card">
+          <div class="promo-card-label">🔴 Buyers</div>
+          <div class="promo-card-title">Register as a Bidder</div>
+          <div class="promo-card-desc">Free registration — just bring a valid ID and contact info. Your account is activated within one business day. Email us to get started.</div>
+        </div>
+        <div class="auction-promo-card">
+          <div class="promo-card-label">⚙️ Sellers</div>
+          <div class="promo-card-title">Consign Your Vehicle</div>
+          <div class="promo-card-desc">Looking to sell? We accept consignments after a quick intake inspection. Reach out to our team to list your vehicle in the next auction event.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -490,7 +443,7 @@
     <p class="reveal" style="transition-delay:0.1s">Whether you need a quick oil change, a full engine overhaul, or your next great vehicle at auction — we're your one-stop automotive partner in Houston.</p>
     <div class="cta-btns reveal" style="transition-delay:0.2s">
       <a href="tel:8005550199" class="btn" style="background:#fff; color:var(--red);">Call (800) 555-0199</a>
-      <a href="#auctions" class="btn btn-outline">Browse Auctions</a>
+      <a href="auctions.html" class="btn btn-outline">Browse Auctions</a>
     </div>
   </div>
 
@@ -550,14 +503,14 @@
         <div class="contact-block reveal" style="transition-delay:0.2s">
           <h3>Car Auctions</h3>
           <p>View live and upcoming auction listings, register as a buyer or seller, and access financing options for your auction win.</p>
-          <a href="#auctions" class="btn btn-primary" style="background:var(--red); color:#fff; margin-top:1rem; display:inline-block; padding:0.65rem 1.4rem; font-size:0.85rem; border-radius:5px;">View Auctions</a>
+          <a href="auctions.html" class="btn btn-primary" style="background:var(--red); color:#fff; margin-top:1rem; display:inline-block; padding:0.65rem 1.4rem; font-size:0.85rem; border-radius:5px;">View Auctions →</a>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 <a href="/">First Up Consultants</a> · All Rights Reserved · Houston, TX  · <a href="mailto:service@firstupconsultants.com">service@firstupconsultants.com</a></p>
+    <p>&copy; 2025 <a href="/">First Up Consultants</a> · All Rights Reserved · Houston, TX · <a href="mailto:service@firstupconsultants.com">service@firstupconsultants.com</a></p>
   </footer>
 
   <script>
@@ -572,23 +525,6 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(r => obs.observe(r));
-
-    // Auction bid buttons
-    document.querySelectorAll('.bid-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const card = this.closest('.auction-card');
-        const priceEl = card.querySelector('.auction-price');
-        const match = priceEl.textContent.match(/\$([\d,]+)/);
-        if (match) {
-          const current = parseInt(match[1].replace(',',''));
-          const next = current + 500;
-          priceEl.innerHTML = '$' + next.toLocaleString() + ' <span>Current Bid</span>';
-          this.textContent = 'Bid Placed!';
-          this.style.background = '#16a34a';
-          setTimeout(() => { this.textContent = 'Place Bid'; this.style.background = ''; }, 2000);
-        }
-      });
-    });
   </script>
 </body>
 </html>
