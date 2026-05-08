@@ -11,193 +11,171 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --red:     #C0392B;
-      --red-dk:  #922b21;
-      --red-lt:  #e74c3c;
-      --charcoal:#1a1a1a;
-      --steel:   #2c2c2c;
-      --silver:  #8a9099;
-      --chrome:  #d4d8dd;
-      --off:     #f4f4f2;
-      --white:   #ffffff;
-      --gold:    #d4a017;
-      --text:    #1a1a1a;
+      --red:#C0392B;--red-dk:#922b21;--red-lt:#e74c3c;--charcoal:#1a1a1a;
+      --steel:#2c2c2c;--silver:#8a9099;--chrome:#d4d8dd;--off:#f4f4f2;
+      --white:#ffffff;--gold:#d4a017;--text:#1a1a1a;
     }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.7; overflow-x: hidden; }
-    h1, h2, h3, h4, h5 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; color: var(--charcoal); line-height: 1.15; letter-spacing: 0.01em; }
-    a { color: var(--red); text-decoration: none; }
-    a:hover { color: var(--red-lt); }
-    img { max-width: 100%; display: block; }
-
-    .top-bar { background: var(--red); color: rgba(255,255,255,0.9); font-size: 0.83rem; padding: 0.5rem 0; text-align: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-    .top-bar a { color: #fff; font-weight: 700; transition: opacity 0.2s; }
-    .top-bar a:hover { opacity: 0.8; }
-
-    header { background: var(--charcoal); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; max-width: 1200px; margin: 0 auto; height: 72px; }
-    .logo-wrap { display: flex; align-items: center; gap: 1rem; }
-    .logo-img { height: 44px; width: auto; }
-    nav ul { display: flex; list-style: none; gap: 0; align-items: center; }
-    nav ul a { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.92rem; color: var(--chrome); padding: 0.5rem 1rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; border-bottom: 2px solid transparent; }
-    nav ul a:hover { color: #fff; border-bottom-color: var(--red); }
-    .nav-cta { background: var(--red) !important; color: #fff !important; border-radius: 4px !important; padding: 0.45rem 1.1rem !important; margin-left: 0.5rem; border-bottom: none !important; }
-    .nav-cta:hover { background: var(--red-lt) !important; }
-    .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; flex-direction: column; gap: 5px; }
-    .menu-toggle span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; }
-
-    .hero { background: var(--charcoal); color: #fff; padding: 0; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
-    .hero-bg-pattern { position: absolute; inset: 0; pointer-events: none; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 60px); }
-    .hero-accent { position: absolute; right: 0; top: 0; bottom: 0; width: 42%; background: linear-gradient(135deg, var(--red-dk) 0%, var(--red) 100%); clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%); opacity: 0.9; }
-    .hero-content { max-width: 1200px; margin: 0 auto; padding: 5rem 1.5rem; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .hero-left { opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards; }
-    .hero-badge { display: inline-block; background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 3px; margin-bottom: 1.5rem; }
-    .hero h1 { font-size: clamp(2.8rem, 6vw, 5rem); color: #fff; margin-bottom: 1rem; text-transform: uppercase; }
-    .hero h1 span { color: var(--red); }
-    .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.7); max-width: 480px; margin-bottom: 2.5rem; line-height: 1.8; }
-    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .hero-right { display: flex; flex-direction: column; gap: 1.2rem; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.45s forwards; }
-    .hero-stat-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.5rem; backdrop-filter: blur(8px); }
-    .hero-stat-card:first-child { border-left: 4px solid var(--red); }
-    .hero-stat-card:nth-child(2) { border-left: 4px solid var(--gold); }
-    .hero-stat-card:last-child { border-left: 4px solid var(--silver); }
-    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2.4rem; color: #fff; line-height: 1; }
-    .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.25rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
-
-    .btn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; padding: 0.85rem 2rem; border-radius: 5px; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.22s; cursor: pointer; text-decoration: none; display: inline-block; }
-    .btn-primary { background: var(--red); color: #fff; }
-    .btn-primary:hover { background: var(--red-lt); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.4); }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: #fff; transform: translateY(-2px); }
-    .btn-dark { background: var(--charcoal); color: #fff; }
-    .btn-dark:hover { background: var(--steel); color: #fff; transform: translateY(-2px); }
-    .btn-gold { background: var(--gold); color: var(--charcoal); }
-    .btn-gold:hover { background: #e6b020; color: var(--charcoal); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,160,23,0.4); }
-
-    .services-strip { background: var(--off); border-bottom: 1px solid var(--chrome); padding: 4rem 1.5rem; }
-    .strip-label { text-align: center; margin-bottom: 3rem; }
-    .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; display: block; }
-    .strip-label h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); text-transform: uppercase; }
-    .strip-label p { color: var(--silver); max-width: 540px; margin: 0.75rem auto 0; font-size: 1rem; }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-    .service-card { background: var(--white); border: 1px solid var(--chrome); border-top: 4px solid var(--charcoal); border-radius: 6px; padding: 2rem 1.5rem; transition: box-shadow 0.3s, transform 0.3s; text-decoration: none; display: block; }
-    .service-card:hover { box-shadow: 0 10px 40px rgba(0,0,0,0.12); transform: translateY(-5px); border-top-color: var(--red); }
-    .service-icon { width: 52px; height: 52px; background: var(--charcoal); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; transition: background 0.2s; }
-    .service-card:hover .service-icon { background: var(--red); }
-    .service-icon svg { width: 26px; height: 26px; fill: #fff; }
-    .service-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--charcoal); text-transform: uppercase; }
-    .service-card p { font-size: 0.88rem; color: var(--silver); line-height: 1.65; }
-    .service-link { display: inline-flex; align-items: center; gap: 0.4rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--red); margin-top: 1rem; }
-
-    .auction-section { padding: 5rem 1.5rem; background: var(--charcoal); position: relative; overflow: hidden; }
-    .auction-section::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 70px), repeating-linear-gradient(-45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 70px); pointer-events: none; }
-    .auction-glow { position: absolute; top: 50%; right: -100px; transform: translateY(-50%); width: 500px; height: 500px; background: radial-gradient(ellipse, rgba(212,160,23,0.12) 0%, transparent 65%); pointer-events: none; }
-    .auction-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .auction-left .section-label { color: var(--gold); }
-    .auction-left h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); color: #fff; text-transform: uppercase; margin-bottom: 1rem; line-height: 1.1; }
-    .auction-left h2 span { color: var(--gold); }
-    .auction-left p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; max-width: 460px; }
-    .auction-features { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2.5rem; }
-    .auction-features li { display: flex; align-items: center; gap: 0.85rem; color: rgba(255,255,255,0.8); font-size: 0.92rem; }
-    .auction-features li::before { content: ''; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
-    .auction-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .auction-right { display: flex; flex-direction: column; gap: 1.25rem; }
-    .auction-promo-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 1.75rem; border-left: 4px solid var(--gold); transition: background 0.25s, transform 0.25s; }
-    .auction-promo-card:hover { background: rgba(255,255,255,0.08); transform: translateX(4px); }
-    .promo-card-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-    .promo-card-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.15rem; color: #fff; text-transform: uppercase; margin-bottom: 0.3rem; }
-    .promo-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
-    .auction-promo-card:nth-child(2) { border-left-color: var(--red); }
-    .auction-promo-card:nth-child(2) .promo-card-label { color: var(--red-lt); }
-    .auction-promo-card:nth-child(3) { border-left-color: var(--silver); }
-    .auction-promo-card:nth-child(3) .promo-card-label { color: var(--chrome); }
-
-    .why-section { padding: 5rem 1.5rem; background: var(--white); }
-    .why-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-    .why-visual { background: var(--charcoal); border-radius: 12px; padding: 3rem; position: relative; overflow: hidden; }
-    .why-visual::before { content: ''; position: absolute; top: -30px; right: -30px; width: 160px; height: 160px; background: var(--red); border-radius: 50%; opacity: 0.15; }
-    .why-visual::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 200px; height: 200px; background: var(--gold); border-radius: 50%; opacity: 0.07; }
-    .why-visual h3 { font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem; text-transform: uppercase; }
-    .why-visual p { color: rgba(255,255,255,0.65); font-size: 0.92rem; margin-bottom: 1.5rem; }
-    .why-checklist { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
-    .why-checklist li { display: flex; align-items: center; gap: 0.75rem; color: rgba(255,255,255,0.8); font-size: 0.9rem; }
-    .check-icon { width: 20px; height: 20px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .check-icon svg { width: 11px; height: 11px; fill: #fff; }
-    .why-right .section-label { color: var(--red); }
-    .why-right h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); text-transform: uppercase; margin-bottom: 0.75rem; }
-    .why-right > p { color: var(--silver); margin-bottom: 2.5rem; }
-    .why-list { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
-    .why-item { display: flex; gap: 1.25rem; align-items: flex-start; }
-    .why-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 2rem; color: var(--chrome); line-height: 1; flex-shrink: 0; width: 40px; }
-    .why-item h4 { font-size: 0.95rem; margin-bottom: 0.2rem; text-transform: uppercase; }
-    .why-item p { font-size: 0.87rem; color: var(--silver); line-height: 1.65; }
-
-    .cta-banner { background: var(--red); color: #fff; padding: 4rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
-    .cta-banner::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 80px); pointer-events: none; }
-    .cta-banner h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); color: #fff; text-transform: uppercase; margin-bottom: 0.75rem; max-width: 700px; margin-left: auto; margin-right: auto; }
-    .cta-banner p { color: rgba(255,255,255,0.82); max-width: 520px; margin: 0 auto 2rem; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    .hours-section { background: var(--off); padding: 4.5rem 1.5rem; border-top: 1px solid var(--chrome); }
-    .hours-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-    .hours-left h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); text-transform: uppercase; margin-bottom: 0.75rem; }
-    .hours-left p { color: var(--silver); margin-bottom: 1.5rem; font-size: 0.95rem; }
-    .hours-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    .hours-table tr { border-bottom: 1px solid var(--chrome); }
-    .hours-table tr:last-child { border-bottom: none; }
-    .hours-table td { padding: 0.7rem 0; color: var(--text); }
-    .hours-table td:last-child { text-align: right; color: var(--red); font-weight: 600; font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; letter-spacing: 0.04em; }
-    .closed-tag { color: var(--silver) !important; }
-    .emergency-box { background: var(--charcoal); border-radius: 8px; padding: 1.75rem; margin-top: 1.5rem; }
-    .emergency-box h4 { color: var(--gold); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-    .emergency-box p { color: rgba(255,255,255,0.7); font-size: 0.87rem; margin-bottom: 0.75rem; }
-    .emergency-box a { color: #fff; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.03em; }
-
-    .contact-section { background: var(--white); padding: 5rem 1.5rem; }
-    .contact-inner { max-width: 1200px; margin: 0 auto; }
-    .contact-section .strip-label { margin-bottom: 3rem; }
-    .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .contact-block { border-top: 4px solid var(--charcoal); padding-top: 1.5rem; transition: border-color 0.2s; }
-    .contact-block:hover { border-top-color: var(--red); }
-    .contact-block h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
-    .contact-block p, .contact-block a { font-size: 0.9rem; color: var(--silver); display: block; margin-bottom: 0.4rem; }
-    .contact-block a:hover { color: var(--red); }
-    .contact-block .highlight { color: var(--charcoal); font-weight: 700; font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; letter-spacing: 0.02em; }
-
-    footer { background: var(--charcoal); color: rgba(255,255,255,0.45); text-align: center; padding: 1.5rem; font-size: 0.8rem; font-family: 'Barlow', sans-serif; border-top: 3px solid var(--red); }
-    footer a { color: rgba(255,255,255,0.45); }
-    footer a:hover { color: #fff; }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.75s ease, transform 0.75s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .ticker-wrap { background: var(--red); overflow: hidden; padding: 0.6rem 0; white-space: nowrap; }
-    .ticker { display: inline-block; animation: ticker 28s linear infinite; }
-    .ticker span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.9); padding: 0 2.5rem; }
-    .ticker span::before { content: '◆  '; color: rgba(255,255,255,0.5); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    @media (max-width: 900px) {
-      .hero-content { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-accent { display: none; }
-      .hero-right { flex-direction: row; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .auction-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .why-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .hours-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .contact-grid { grid-template-columns: 1fr; }
+    html{scroll-behavior:smooth;}
+    body{background:var(--white);color:var(--text);font-family:'Barlow',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+    h1,h2,h3,h4,h5{font-family:'Barlow Condensed',sans-serif;font-weight:800;color:var(--charcoal);line-height:1.15;letter-spacing:.01em;}
+    a{color:var(--red);text-decoration:none;}
+    a:hover{color:var(--red-lt);}
+    img{max-width:100%;display:block;}
+    .top-bar{background:var(--red);color:rgba(255,255,255,.9);font-size:.83rem;padding:.5rem 0;text-align:center;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+    .top-bar a{color:#fff;font-weight:700;transition:opacity .2s;}
+    .top-bar a:hover{opacity:.8;}
+    header{background:var(--charcoal);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;max-width:1200px;margin:0 auto;height:72px;}
+    .logo-wrap{display:flex;align-items:center;gap:1rem;}
+    .logo-img{height:44px;width:auto;}
+    nav ul{display:flex;list-style:none;gap:0;align-items:center;}
+    nav ul a{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:.92rem;color:var(--chrome);padding:.5rem 1rem;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;border-bottom:2px solid transparent;}
+    nav ul a:hover{color:#fff;border-bottom-color:var(--red);}
+    .nav-cta{background:var(--red)!important;color:#fff!important;border-radius:4px!important;padding:.45rem 1.1rem!important;margin-left:.5rem;border-bottom:none!important;}
+    .nav-cta:hover{background:var(--red-lt)!important;}
+    .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:.4rem;flex-direction:column;gap:5px;}
+    .menu-toggle span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;}
+    .hero{background:var(--charcoal);color:#fff;padding:0;min-height:92vh;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+    .hero-bg-pattern{position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(-45deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 60px);}
+    .hero-accent{position:absolute;right:0;top:0;bottom:0;width:42%;background:linear-gradient(135deg,var(--red-dk) 0%,var(--red) 100%);clip-path:polygon(15% 0,100% 0,100% 100%,0% 100%);opacity:.9;}
+    .hero-content{max-width:1200px;margin:0 auto;padding:5rem 1.5rem;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+    .hero-left{opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .2s forwards;}
+    .hero-badge{display:inline-block;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .9rem;border-radius:3px;margin-bottom:1.5rem;}
+    .hero h1{font-size:clamp(2.8rem,6vw,5rem);color:#fff;margin-bottom:1rem;text-transform:uppercase;}
+    .hero h1 span{color:var(--red);}
+    .hero-sub{font-size:1.05rem;color:rgba(255,255,255,.7);max-width:480px;margin-bottom:2.5rem;line-height:1.8;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .hero-right{display:flex;flex-direction:column;gap:1.2rem;opacity:0;animation:fadeUp .9s cubic-bezier(.16,1,.3,1) .45s forwards;}
+    .hero-stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.5rem;backdrop-filter:blur(8px);}
+    .hero-stat-card:first-child{border-left:4px solid var(--red);}
+    .hero-stat-card:nth-child(2){border-left:4px solid var(--gold);}
+    .hero-stat-card:last-child{border-left:4px solid var(--silver);}
+    .stat-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;color:#fff;line-height:1;}
+    .stat-label{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:.25rem;font-weight:500;text-transform:uppercase;letter-spacing:.06em;}
+    .btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;padding:.85rem 2rem;border-radius:5px;letter-spacing:.08em;text-transform:uppercase;transition:all .22s;cursor:pointer;text-decoration:none;display:inline-block;}
+    .btn-primary{background:var(--red);color:#fff;}
+    .btn-primary:hover{background:var(--red-lt);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,57,43,.4);}
+    .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);}
+    .btn-outline:hover{background:rgba(255,255,255,.1);border-color:#fff;transform:translateY(-2px);}
+    .btn-dark{background:var(--charcoal);color:#fff;}
+    .btn-dark:hover{background:var(--steel);color:#fff;transform:translateY(-2px);}
+    .btn-gold{background:var(--gold);color:var(--charcoal);}
+    .btn-gold:hover{background:#e6b020;color:var(--charcoal);transform:translateY(-2px);box-shadow:0 6px 20px rgba(212,160,23,.4);}
+    .services-strip{background:var(--off);border-bottom:1px solid var(--chrome);padding:4rem 1.5rem;}
+    .strip-label{text-align:center;margin-bottom:3rem;}
+    .section-label{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;display:block;}
+    .strip-label h2{font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;}
+    .strip-label p{color:var(--silver);max-width:540px;margin:.75rem auto 0;font-size:1rem;}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto;}
+    .service-card{background:var(--white);border:1px solid var(--chrome);border-top:4px solid var(--charcoal);border-radius:6px;padding:2rem 1.5rem;transition:box-shadow .3s,transform .3s;text-decoration:none;display:block;}
+    .service-card:hover{box-shadow:0 10px 40px rgba(0,0,0,.12);transform:translateY(-5px);border-top-color:var(--red);}
+    .service-icon{width:52px;height:52px;background:var(--charcoal);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem;transition:background .2s;}
+    .service-card:hover .service-icon{background:var(--red);}
+    .service-icon svg{width:26px;height:26px;fill:#fff;}
+    .service-card h3{font-size:1.15rem;margin-bottom:.5rem;color:var(--charcoal);text-transform:uppercase;}
+    .service-card p{font-size:.88rem;color:var(--silver);line-height:1.65;}
+    .service-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-top:1rem;}
+    .auction-section{padding:5rem 1.5rem;background:var(--charcoal);position:relative;overflow:hidden;}
+    .auction-section::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 70px),repeating-linear-gradient(-45deg,rgba(255,255,255,.012) 0px,rgba(255,255,255,.012) 1px,transparent 1px,transparent 70px);pointer-events:none;}
+    .auction-glow{position:absolute;top:50%;right:-100px;transform:translateY(-50%);width:500px;height:500px;background:radial-gradient(ellipse,rgba(212,160,23,.12) 0%,transparent 65%);pointer-events:none;}
+    .auction-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .auction-left .section-label{color:var(--gold);}
+    .auction-left h2{font-size:clamp(2.2rem,5vw,3.5rem);color:#fff;text-transform:uppercase;margin-bottom:1rem;line-height:1.1;}
+    .auction-left h2 span{color:var(--gold);}
+    .auction-left p{color:rgba(255,255,255,.65);font-size:1rem;line-height:1.8;margin-bottom:2rem;max-width:460px;}
+    .auction-features{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-bottom:2.5rem;}
+    .auction-features li{display:flex;align-items:center;gap:.85rem;color:rgba(255,255,255,.8);font-size:.92rem;}
+    .auction-features li::before{content:'';width:8px;height:8px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+    .auction-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .auction-right{display:flex;flex-direction:column;gap:1.25rem;}
+    .auction-promo-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.75rem;border-left:4px solid var(--gold);transition:background .25s,transform .25s;}
+    .auction-promo-card:hover{background:rgba(255,255,255,.08);transform:translateX(4px);}
+    .promo-card-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+    .promo-card-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;color:#fff;text-transform:uppercase;margin-bottom:.3rem;}
+    .promo-card-desc{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.6;}
+    .auction-promo-card:nth-child(2){border-left-color:var(--red);}
+    .auction-promo-card:nth-child(2) .promo-card-label{color:var(--red-lt);}
+    .auction-promo-card:nth-child(3){border-left-color:var(--silver);}
+    .auction-promo-card:nth-child(3) .promo-card-label{color:var(--chrome);}
+    .why-section{padding:5rem 1.5rem;background:var(--white);}
+    .why-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .why-visual{background:var(--charcoal);border-radius:12px;padding:3rem;position:relative;overflow:hidden;}
+    .why-visual::before{content:'';position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:var(--red);border-radius:50%;opacity:.15;}
+    .why-visual::after{content:'';position:absolute;bottom:-40px;left:-40px;width:200px;height:200px;background:var(--gold);border-radius:50%;opacity:.07;}
+    .why-visual h3{font-size:1.8rem;color:#fff;margin-bottom:.5rem;text-transform:uppercase;}
+    .why-visual p{color:rgba(255,255,255,.65);font-size:.92rem;margin-bottom:1.5rem;}
+    .why-checklist{list-style:none;display:flex;flex-direction:column;gap:.8rem;}
+    .why-checklist li{display:flex;align-items:center;gap:.75rem;color:rgba(255,255,255,.8);font-size:.9rem;}
+    .check-icon{width:20px;height:20px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .check-icon svg{width:11px;height:11px;fill:#fff;}
+    .why-right .section-label{color:var(--red);}
+    .why-right h2{font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;margin-bottom:.75rem;}
+    .why-right>p{color:var(--silver);margin-bottom:2.5rem;}
+    .why-list{list-style:none;display:flex;flex-direction:column;gap:1.5rem;}
+    .why-item{display:flex;gap:1.25rem;align-items:flex-start;}
+    .why-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--chrome);line-height:1;flex-shrink:0;width:40px;}
+    .why-item h4{font-size:.95rem;margin-bottom:.2rem;text-transform:uppercase;}
+    .why-item p{font-size:.87rem;color:var(--silver);line-height:1.65;}
+    .cta-banner{background:var(--red);color:#fff;padding:4rem 1.5rem;text-align:center;position:relative;overflow:hidden;}
+    .cta-banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 80px);pointer-events:none;}
+    .cta-banner h2{font-size:clamp(1.8rem,4.5vw,3rem);color:#fff;text-transform:uppercase;margin-bottom:.75rem;max-width:700px;margin-left:auto;margin-right:auto;}
+    .cta-banner p{color:rgba(255,255,255,.82);max-width:520px;margin:0 auto 2rem;}
+    .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .hours-section{background:var(--off);padding:4.5rem 1.5rem;border-top:1px solid var(--chrome);}
+    .hours-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .hours-left h2{font-size:clamp(1.6rem,3.5vw,2.4rem);text-transform:uppercase;margin-bottom:.75rem;}
+    .hours-left p{color:var(--silver);margin-bottom:1.5rem;font-size:.95rem;}
+    .hours-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+    .hours-table tr{border-bottom:1px solid var(--chrome);}
+    .hours-table tr:last-child{border-bottom:none;}
+    .hours-table td{padding:.7rem 0;color:var(--text);}
+    .hours-table td:last-child{text-align:right;color:var(--red);font-weight:600;font-family:'Barlow Condensed',sans-serif;font-size:.95rem;letter-spacing:.04em;}
+    .closed-tag{color:var(--silver)!important;}
+    .emergency-box{background:var(--charcoal);border-radius:8px;padding:1.75rem;margin-top:1.5rem;}
+    .emergency-box h4{color:var(--gold);font-size:.9rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;}
+    .emergency-box p{color:rgba(255,255,255,.7);font-size:.87rem;margin-bottom:.75rem;}
+    .emergency-box a{color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.15rem;letter-spacing:.03em;}
+    .contact-section{background:var(--white);padding:5rem 1.5rem;}
+    .contact-inner{max-width:1200px;margin:0 auto;}
+    .contact-section .strip-label{margin-bottom:3rem;}
+    .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+    .contact-block{border-top:4px solid var(--charcoal);padding-top:1.5rem;transition:border-color .2s;}
+    .contact-block:hover{border-top-color:var(--red);}
+    .contact-block h3{font-size:1rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem;}
+    .contact-block p,.contact-block a{font-size:.9rem;color:var(--silver);display:block;margin-bottom:.4rem;}
+    .contact-block a:hover{color:var(--red);}
+    .contact-block .highlight{color:var(--charcoal);font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;letter-spacing:.02em;}
+    footer{background:var(--charcoal);color:rgba(255,255,255,.45);text-align:center;padding:1.5rem;font-size:.8rem;font-family:'Barlow',sans-serif;border-top:3px solid var(--red);}
+    footer a{color:rgba(255,255,255,.45);}
+    footer a:hover{color:#fff;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .75s ease,transform .75s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .ticker-wrap{background:var(--red);overflow:hidden;padding:.6rem 0;white-space:nowrap;}
+    .ticker{display:inline-block;animation:ticker 28s linear infinite;}
+    .ticker span{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:0 2.5rem;}
+    .ticker span::before{content:'◆  ';color:rgba(255,255,255,.5);}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media(max-width:900px){
+      .hero-content{grid-template-columns:1fr;gap:3rem;}
+      .hero-accent{display:none;}
+      .hero-right{flex-direction:row;}
+      .services-grid{grid-template-columns:1fr 1fr;}
+      .auction-inner{grid-template-columns:1fr;gap:3rem;}
+      .why-inner{grid-template-columns:1fr;gap:3rem;}
+      .hours-inner{grid-template-columns:1fr;gap:2rem;}
+      .contact-grid{grid-template-columns:1fr;}
     }
-    @media (max-width: 640px) {
-      .menu-toggle { display: flex; }
-      nav { display: none; }
-      nav.open { display: block; position: absolute; top: 72px; left: 0; right: 0; background: var(--charcoal); border-top: 2px solid var(--red); padding: 1rem; }
-      nav.open ul { flex-direction: column; gap: 0; }
-      nav.open ul a { display: block; padding: 0.7rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
-      .header-inner { position: relative; }
-      .services-grid { grid-template-columns: 1fr; }
-      .hero-right { flex-direction: column; }
-      .auction-btns { flex-direction: column; }
+    @media(max-width:640px){
+      .menu-toggle{display:flex;}
+      nav{display:none;}
+      nav.open{display:block;position:absolute;top:72px;left:0;right:0;background:var(--charcoal);border-top:2px solid var(--red);padding:1rem;}
+      nav.open ul{flex-direction:column;gap:0;}
+      nav.open ul a{display:block;padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.06);}
+      .header-inner{position:relative;}
+      .services-grid{grid-template-columns:1fr;}
+      .hero-right{flex-direction:column;}
+      .auction-btns{flex-direction:column;}
     }
   </style>
 </head>
@@ -242,18 +220,9 @@
         </div>
       </div>
       <div class="hero-right">
-        <div class="hero-stat-card">
-          <div class="stat-num">5+</div>
-          <div class="stat-label">Years Serving Houston</div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-num">3,200+</div>
-          <div class="stat-label">Vehicles Auctioned</div>
-        </div>
-        <div class="hero-stat-card">
-          <div class="stat-num">12★</div>
-          <div class="stat-label">Month Warranty</div>
-        </div>
+        <div class="hero-stat-card"><div class="stat-num">5+</div><div class="stat-label">Years Serving Houston</div></div>
+        <div class="hero-stat-card"><div class="stat-num">3,200+</div><div class="stat-label">Vehicles Auctioned</div></div>
+        <div class="hero-stat-card"><div class="stat-num">12★</div><div class="stat-label">Month Warranty</div></div>
       </div>
     </div>
   </section>
@@ -273,49 +242,37 @@
     </div>
     <div class="services-grid">
       <a href="https://contact.1stupconsultants.com" class="service-card reveal">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4zM13 18h-2v-2h2v2zm0-4h-2V9h2v5z"/></svg>
-        </div>
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4zM13 18h-2v-2h2v2zm0-4h-2V9h2v5z"/></svg></div>
         <h3>Engine Diagnostics &amp; Repair</h3>
         <p>Advanced computer diagnostics pinpoint issues fast. From check-engine lights to full rebuilds, we fix it right the first time.</p>
         <div class="service-link">Book Service →</div>
       </a>
-      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:0.1s">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm0-14.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
-        </div>
+      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:.1s">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M12 1C5.93 1 1 5.93 1 12s4.93 11 11 11 11-4.93 11-11S18.07 1 12 1zm0 20c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm0-14.5c-3.03 0-5.5 2.47-5.5 5.5s2.47 5.5 5.5 5.5 5.5-2.47 5.5-5.5-2.47-5.5-5.5-5.5zm0 9c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg></div>
         <h3>Brake &amp; Tire Services</h3>
         <p>Full brake inspections, pad replacements, rotor resurfacing, tire rotations, alignments, and new tire installations.</p>
         <div class="service-link">Book Service →</div>
       </a>
-      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:0.2s">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.97L5.71 21l1-2 1 2 1-2 1 2 1-2 1 2 .71-1.06C14.71 17.32 16 13.91 16 12c3 1 3.93 3.51 4 5h2c0-4-2.55-8.15-5-9z"/></svg>
-        </div>
+      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:.2s">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 19.97L5.71 21l1-2 1 2 1-2 1 2 1-2 1 2 .71-1.06C14.71 17.32 16 13.91 16 12c3 1 3.93 3.51 4 5h2c0-4-2.55-8.15-5-9z"/></svg></div>
         <h3>Oil Change &amp; Maintenance</h3>
         <p>Express oil changes, fluid top-offs, filter replacements, and 27-point vehicle inspections. In and out in under an hour.</p>
         <div class="service-link">Book Service →</div>
       </a>
-      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:0.1s">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
-        </div>
+      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:.1s">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg></div>
         <h3>Transmission Services</h3>
         <p>Transmission fluid flushes, filter replacements, clutch repairs, and full rebuilds for both automatic and manual transmissions.</p>
         <div class="service-link">Book Service →</div>
       </a>
-      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:0.2s">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M7 4c-1.1 0-2 .9-2 2H3c-1.1 0-2 .9-2 2v3h2c0 1.66 1.34 3 3 3s3-1.34 3-3h4c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-3c0-1.1-.9-2-2-2h-2c0-1.1-.9-2-2-2H7zm0 1.5h10V9H5V6c0-.28.22-.5.5-.5H7zm-1 5c.83 0 1.5.67 1.5 1.5S6.83 13.5 6 13.5 4.5 12.83 4.5 12 5.17 10.5 6 10.5zm12 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg>
-        </div>
+      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:.2s">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M7 4c-1.1 0-2 .9-2 2H3c-1.1 0-2 .9-2 2v3h2c0 1.66 1.34 3 3 3s3-1.34 3-3h4c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-3c0-1.1-.9-2-2-2h-2c0-1.1-.9-2-2-2H7zm0 1.5h10V9H5V6c0-.28.22-.5.5-.5H7zm-1 5c.83 0 1.5.67 1.5 1.5S6.83 13.5 6 13.5 4.5 12.83 4.5 12 5.17 10.5 6 10.5zm12 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/></svg></div>
         <h3>Fleet &amp; Commercial Vehicles</h3>
         <p>Scheduled maintenance programs for commercial fleets of any size. Minimize downtime and keep your operation running smooth.</p>
         <div class="service-link">Get Fleet Quote →</div>
       </a>
-      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:0.3s">
-        <div class="service-icon">
-          <svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-        </div>
+      <a href="https://contact.1stupconsultants.com" class="service-card reveal" style="transition-delay:.3s">
+        <div class="service-icon"><svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></div>
         <h3>AC, Electrical &amp; More</h3>
         <p>AC recharge and repair, battery testing and replacement, wiring diagnostics, alternator and starter services.</p>
         <div class="service-link">Book Service →</div>
@@ -341,7 +298,7 @@
           <a href="http://auctions.1stupconsultants.com" class="btn btn-gold">View Auctions &amp; Register</a>
         </div>
       </div>
-      <div class="auction-right reveal" style="transition-delay:0.15s">
+      <div class="auction-right reveal" style="transition-delay:.15s">
         <div class="auction-promo-card">
           <div class="promo-card-label">🟡 Live Now</div>
           <div class="promo-card-title">Active Auction Events</div>
@@ -375,27 +332,15 @@
           <li><div class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>12-month / 12,000-mile repair warranty</li>
         </ul>
       </div>
-      <div class="why-right reveal" style="transition-delay:0.15s">
+      <div class="why-right reveal" style="transition-delay:.15s">
         <span class="section-label">Why Choose First Up</span>
         <h2>A Higher Standard of Auto Care</h2>
         <p>We built First Up Consultants on one principle: treat every vehicle — and every customer — like it matters. Because it does.</p>
         <ul class="why-list">
-          <li class="why-item">
-            <div class="why-num">01</div>
-            <div><h4>Transparent, Flat-Rate Estimates</h4><p>You approve every repair before we touch it. Our estimates are locked in — what you're quoted is what you pay. Zero surprises.</p></div>
-          </li>
-          <li class="why-item">
-            <div class="why-num">02</div>
-            <div><h4>Same-Day Service on Most Repairs</h4><p>We stock parts and keep our bays moving so you're not without your vehicle for days. Most jobs are done by end of business.</p></div>
-          </li>
-          <li class="why-item">
-            <div class="why-num">03</div>
-            <div><h4>Auction-Grade Vehicle Inspection</h4><p>Every car in our auction undergoes a 150-point inspection and full title verification. Bid on facts, not guesses.</p></div>
-          </li>
-          <li class="why-item">
-            <div class="why-num">04</div>
-            <div><h4>Texas Licensed &amp; Insured</h4><p>We carry full garage liability insurance. Your vehicle and your investment are always protected.</p></div>
-          </li>
+          <li class="why-item"><div class="why-num">01</div><div><h4>Transparent, Flat-Rate Estimates</h4><p>You approve every repair before we touch it. Our estimates are locked in — what you're quoted is what you pay. Zero surprises.</p></div></li>
+          <li class="why-item"><div class="why-num">02</div><div><h4>Same-Day Service on Most Repairs</h4><p>We stock parts and keep our bays moving so you're not without your vehicle for days. Most jobs are done by end of business.</p></div></li>
+          <li class="why-item"><div class="why-num">03</div><div><h4>Auction-Grade Vehicle Inspection</h4><p>Every car in our auction undergoes a 150-point inspection and full title verification. Bid on facts, not guesses.</p></div></li>
+          <li class="why-item"><div class="why-num">04</div><div><h4>Texas Licensed &amp; Insured</h4><p>We carry full garage liability insurance. Your vehicle and your investment are always protected.</p></div></li>
         </ul>
         <div style="margin-top:2.5rem;">
           <a href="https://contact.1stupconsultants.com" class="btn btn-primary">Schedule a Visit</a>
@@ -406,9 +351,9 @@
 
   <div class="cta-banner">
     <h2 class="reveal">"First Up — First Class Service, Every Time."</h2>
-    <p class="reveal" style="transition-delay:0.1s">Whether you need a quick oil change, a full engine overhaul, or your next great vehicle at auction — we're your one-stop automotive partner in Houston.</p>
-    <div class="cta-btns reveal" style="transition-delay:0.2s">
-      <a href="tel:8322836279" class="btn" style="background:#fff; color:var(--red);">Call (832) 283-6279</a>
+    <p class="reveal" style="transition-delay:.1s">Whether you need a quick oil change, a full engine overhaul, or your next great vehicle at auction — we're your one-stop automotive partner in Houston.</p>
+    <div class="cta-btns reveal" style="transition-delay:.2s">
+      <a href="tel:8322836279" class="btn" style="background:#fff;color:var(--red);">Call (832) 283-6279</a>
       <a href="auctions.html" class="btn btn-outline">Browse Auctions</a>
     </div>
   </div>
@@ -419,14 +364,14 @@
         <span class="section-label">We're Open</span>
         <h2>Shop Hours</h2>
         <p>Drop in or schedule ahead. For breakdowns and towing, our emergency line is available around the clock.</p>
-        <a href="tel:8322836279" class="btn btn-dark" style="margin-top:0.5rem;">Call for Appointment</a>
+        <a href="tel:8322836279" class="btn btn-dark" style="margin-top:.5rem;">Call for Appointment</a>
         <div class="emergency-box">
           <h4>⚡ 24/7 Emergency Towing</h4>
           <p>Stranded in the Houston metro? We'll come to you — day or night.</p>
           <a href="tel:8322836279">(832) 283-6279</a>
         </div>
       </div>
-      <div class="reveal" style="transition-delay:0.15s">
+      <div class="reveal" style="transition-delay:.15s">
         <table class="hours-table">
           <tbody>
             <tr><td>Monday</td><td>8:00 AM – 6:00 PM</td></tr>
@@ -455,19 +400,19 @@
           <a href="tel:8322836279" class="highlight">(832) 283-6279</a>
           <a href="mailto:service@firstupconsultants.com">service@firstupconsultants.com</a>
           <p>Houston, Texas</p>
-          <p style="margin-top:0.5rem; font-size:0.82rem; color:var(--silver);">TxDMV Licensed · Fully Insured · ASE Certified</p>
+          <p style="margin-top:.5rem;font-size:.82rem;color:var(--silver);">TxDMV Licensed · Fully Insured · ASE Certified</p>
         </div>
-        <div class="contact-block reveal" style="transition-delay:0.1s">
+        <div class="contact-block reveal" style="transition-delay:.1s">
           <h3>Auto Repair</h3>
           <a href="https://contact.1stupconsultants.com">Schedule a Service Appointment</a>
           <a href="https://contact.1stupconsultants.com">Request a Free Estimate</a>
           <a href="https://contact.1stupconsultants.com">Fleet &amp; Commercial Inquiries</a>
           <a href="tel:8322836279">24/7 Emergency Towing</a>
         </div>
-        <div class="contact-block reveal" style="transition-delay:0.2s">
+        <div class="contact-block reveal" style="transition-delay:.2s">
           <h3>Car Auctions</h3>
           <p>View live and upcoming auction listings, register as a buyer or seller, and access financing options for your auction win.</p>
-          <a href="auctions.html" class="btn btn-primary" style="background:var(--red); color:#fff; margin-top:1rem; display:inline-block; padding:0.65rem 1.4rem; font-size:0.85rem; border-radius:5px;">View Auctions →</a>
+          <a href="auctions.html" class="btn btn-primary" style="background:var(--red);color:#fff;margin-top:1rem;display:inline-block;padding:.65rem 1.4rem;font-size:.85rem;border-radius:5px;">View Auctions →</a>
         </div>
       </div>
     </div>
@@ -478,17 +423,14 @@
   </footer>
 
   <script>
-    const toggle = document.getElementById('menuToggle');
-    const nav = document.getElementById('mainNav');
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
-
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(r => obs.observe(r));
+    const toggle=document.getElementById('menuToggle');
+    const nav=document.getElementById('mainNav');
+    toggle.addEventListener('click',()=>nav.classList.toggle('open'));
+    const reveals=document.querySelectorAll('.reveal');
+    const obs=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+    },{threshold:.1});
+    reveals.forEach(r=>obs.observe(r));
   </script>
 </body>
 </html>
